@@ -1,0 +1,1115 @@
+/* ==========================================================================
+   1. CONFIGURAÇÕES GERAIS, VARIÁVEIS E FONTES
+   ========================================================================== */
+
+:root {
+    /* Cores */
+    --cor-principal: #331694;
+    --cor-secundaria: #210F59;
+    --cor-destaque: #73DBB8;
+    --cor-destaque-gradiente: #69c8a4;
+    --cor-texto-claro: #ffffff;
+    --cor-texto-escuro: #333;
+    --cor-fundo-claro: #ffffff;
+    --cor-fundo-escuro: #f4f7fc;
+
+    /* Gradientes */
+    --gradiente-card: linear-gradient(to bottom, #50997d, #5cb090, #69c8a4);
+
+    /* Fontes */
+    --fonte-titulo: "CoolveticaCond", sans-serif;
+    --fonte-texto: "Calibri-regular", sans-serif;
+    --fonte-texto-bold: "Calibri-bold", sans-serif;
+    --fonte-texto-italic: "Calibri-italic", sans-serif;
+
+    /* Transições */
+    --transicao-padrao: all 0.3s ease;
+}
+
+/* --- Fontes --- */
+@font-face {
+    font-family: "Coolvetica";
+    src: url(Tipografia/CoolveticaRg.otf);
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "CoolveticaCond";
+    src: url(Tipografia/CoolveticaRgCond.otf);
+    font-weight: 500; /* Usando um peso para a versão condensada */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Calibri-regular";
+    src: url(Tipografia/calibri-regular.ttf);
+    font-display: swap;
+}
+@font-face {
+    font-family: "Calibri-bold";
+    src: url(Tipografia/calibri-bold.ttf);
+    font-display: swap;
+}
+@font-face {
+    font-family: "Calibri-italic";
+    src: url(Tipografia/calibri-italic.ttf);
+    font-display: swap;
+}
+
+/* --- Reset e Padrões Globais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* 1rem = 16px */
+}
+
+body {
+    font-family: var(--fonte-texto);
+    color: var(--cor-texto-escuro);
+    background-color: var(--cor-fundo-claro);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1, h2, h3 {
+    font-family: var(--fonte-titulo);
+    font-weight: 500; /* Usando a versão condensada como padrão */
+    color: var(--cor-principal);
+    line-height: 1.2;
+}
+
+.container-grid {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* section {
+    padding: 5rem 0;
+} */
+
+/* ==========================================================================
+   2. HEADER E NAVEGAÇÃO
+   ========================================================================== */
+
+   .menu {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.menu .container-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.menu img {
+    height: 80px;
+}
+
+.menu .secao {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    font-size: 2rem;
+    font-family: var(--fonte-texto);
+
+    margin-top: 1rem;
+}
+
+.menu .secao a {
+    color: var(--cor-principal);
+    transition: var(--transicao-padrao);
+    padding: 0.5rem;
+}
+
+.menu .secao a:hover {
+    color: var(--cor-destaque);
+    transform: scale(1.05);
+}
+
+.menu .latencia-link a {
+    color: var(--cor-destaque);
+    transition: var(--transicao-padrao);
+    padding: 0.5rem;
+}
+
+.menu .latencia-link a {
+    display: inline-block; 
+    transition: var(--transicao-padrao);
+}
+
+.menu .latencia-link a:hover {
+    transform: scale(1.05);
+    color: var(--cor-principal);
+}
+
+
+/* ==========================================================================
+   3. CARROSSEL
+   ========================================================================== */
+   
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel input {
+    display: none;
+}
+
+.slides {
+    display: flex;
+    width: 400%; /* 100% por slide */
+    height: auto;
+    transition: transform 0.6s ease-in-out;
+}
+
+.slide {
+    width: 25%; /* 100% / 4 slides */
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Movimentação dos slides */
+#slide1:checked ~ .slides { transform: translateX(0); }
+#slide2:checked ~ .slides { transform: translateX(-25%); }
+#slide3:checked ~ .slides { transform: translateX(-50%); }
+#slide4:checked ~ .slides { transform: translateX(-75%); }
+
+/* Navegação (bolinhas) */
+.navigation {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+}
+
+.bar {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--cor-texto-claro);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: var(--transicao-padrao);
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.bar:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+#slide1:checked ~ .navigation .bar:nth-child(1),
+#slide2:checked ~ .navigation .bar:nth-child(2),
+#slide3:checked ~ .navigation .bar:nth-child(3),
+#slide4:checked ~ .navigation .bar:nth-child(4) {
+    opacity: 1;
+    background-color: var(--cor-destaque);
+}
+
+/* ==========================================================================
+   4. SEÇÃO SOBRE
+   ========================================================================== */
+#sobre {
+    padding: 5rem 0;
+}
+
+.sobre-container {
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    align-items: center;
+    gap: 4rem;
+}
+
+.sobre-texto h2 {
+    
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.sobre-texto p {
+    width: 80%;
+    
+    font-size: 1.8rem;
+    color: var(--cor-principal);
+    margin-bottom: 1rem;
+}
+
+.sobre-texto strong {
+    font-family: var(--fonte-texto-italic);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   5. SEÇÃO VALORES (Qualidade e Confiança)
+   ========================================================================== */
+#valores {
+    padding: 5rem 0;
+}
+
+#valores .container-cards {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+}
+
+.card-valor {
+    position: relative;
+    width: 415px;
+    height: 690px;
+    padding: 2rem;
+    background: var(--gradiente-card);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transicao-padrao);
+}
+
+.card-valor svg {
+    width: 50%;
+    height: auto;
+    margin-bottom: 2rem;
+    color: var(--cor-principal);
+}
+
+
+.card-valor h3 {
+    font-family: var(--fonte-titulo);
+    
+    font-size: 3rem;
+    color: var(--cor-principal);
+}
+
+.hover-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    font-size: 1.1rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: var(--transicao-padrao);
+}
+
+.card-valor:hover .hover-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   6. SEÇÃO AVALIAÇÕES (Dados)
+   ========================================================================== */
+#avaliacoes {
+    padding: 5rem 0;
+    text-align: center;
+}
+
+#avaliacoes h2 {
+    font-size: 4rem;
+    margin-bottom: 4rem;
+}
+
+#avaliacoes .dados {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.dado-item {
+    padding: 2rem;
+    border-radius: 20px;
+    transition: var(--transicao-padrao);
+    cursor: pointer;
+    min-width: 250px;
+    text-align: center;
+}
+
+.dado-item:hover {
+    transform: translateY(-10px);
+    background-color: var(--cor-fundo-claro);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.dado-item h3 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.dado-item .destaque-verde {
+    color: var(--cor-destaque);
+}
+
+.dado-item p {
+    font-family: var(--fonte-texto-bold);
+    font-size: 1.2rem;
+    color: var(--cor-secundaria);
+}
+
+/* ==========================================================================
+   7. SEÇÃO SERVIÇOS (Cards Flip)
+   ========================================================================== */
+/* --- Seção Serviços (Cards Flip) --- */
+#banner-servicos {
+   width: 100%;
+}
+
+#servicos {
+    text-align: center;
+    padding: 5rem 0;
+}
+
+#servicos .container-cards2 {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+#servicos .saber p {
+    font-family: var(--fonte-titulo);
+    font-size: 2.5rem;
+    color: #331694;
+    margin-top: 2rem;
+}
+
+/* --- Estrutura do Card Flip --- */
+.card-container {
+    width: 415px;
+    height: 690px;
+    perspective: 1500px; /* Essencial para o efeito 3D */
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+/* A classe que o JavaScript vai adicionar para girar */
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Esconde o lado de trás do elemento */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Frente do Card */
+.card-front {
+    background-image: linear-gradient(to bottom, #50997d, #56a587, #5cb090, #63bc9a, #69c8a4);
+    color: #331694;
+}
+
+#servicos .card-front p {
+    font-family: var(--fonte-titulo);
+}
+
+.card-front svg {
+    width: 60%;
+    height: auto;
+    color: #331694; /* Garante que o SVG herde a cor */
+}
+
+.card-front p {
+    font-size: 3rem;
+    color: #331694;
+    margin-top: 1rem;
+}
+
+/* Verso do Card */
+.card-back {
+    background-color: #331694;
+    color: white;
+    transform: rotateY(180deg); /* O verso já começa virado */
+    align-items: flex-start;
+    text-align: left;
+}
+
+.card-back h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 3rem;
+    color: #69c8a4;
+    margin-bottom: 2rem;
+}
+
+.card-back .text-content p {
+    font-family: var(--fonte-titulo);
+}
+
+.card-back ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.card-back li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.card-back .dot {
+    min-width: 12px;
+    height: 12px;
+    background-color: white;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+}
+
+.card-back .text-content h3 {
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.card-back .text-content p {
+    font-family: var(--cor-principal);
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    line-height: 1.4;
+}
+
+.fale-conosco {
+    background-color: #69c8a4;
+    color: #331694;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: auto; /* Empurra para o final */
+    align-self: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.fale-conosco:hover {
+    transform: scale(1.05);
+}
+
+#servicos .saber p {
+    font-family: var(--fonte-titulo);
+}
+
+
+/* ==========================================================================
+   8. SEÇÃO CONTATO
+   ========================================================================== */
+#contato {
+    padding: 5rem 0;
+}
+
+#contato h2 {
+    font-size: 5rem;
+    color: var(--cor-secundaria);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#contato .campo {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+}
+
+.campo p {
+    font-family: var(--fonte-titulo);
+    font-size: 2.5rem;
+}
+
+.btn-whatsapp {
+    background-color: var(--cor-destaque);
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    transition: var(--transicao-padrao);
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-whatsapp .elementos {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--cor-secundaria);
+}
+
+.btn-whatsapp .elementos img {
+    color: var(--cor-principal);
+    
+    width: 30px;
+    height: 30px;
+}
+
+.btn-whatsapp .elementos p {
+    font-family: var(--fonte-titulo);
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   9. FOOTER
+   ========================================================================== */
+footer {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto-claro);
+    padding: 4rem 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+footer .redes-sociais {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .logo-footer img {
+    height: 60px;
+
+    color: white;
+}
+
+footer .icones-redes {
+    display: flex;
+    gap: 2rem;
+}
+
+footer .bloco {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: var(--transicao-padrao);
+    color: inherit; /* garante que o texto herde a cor no hover */
+}
+
+footer .bloco:hover {
+    color: var(--cor-destaque);
+    transform: translateY(-5px);
+}
+
+footer .bloco img {
+    width: 30px;
+    height: 30px;
+    transition: var(--transicao-padrao);
+}
+
+/* Aplica o efeito no SVG quando o bloco recebe hover */
+footer .bloco:hover img {
+    filter: brightness(0) invert(1); 
+    /* você pode trocar para outra cor se quiser */
+}
+
+
+footer .bloco p {
+    font-family: var(--fonte-titulo);
+    font-size: 1.5rem;
+}
+
+/* ==========================================================================
+   10. CHATBOT (Estilos mantidos do seu código original)
+   ========================================================================== */
+:root {
+    --primary-gradient: linear-gradient(135deg, #2D00F7 0%, #A000F7 100%);
+    --bg-dark: #0a0b1e;
+    --accent-green: #00ffbf;
+    --glass-bg: rgba(16, 20, 45, 0.95);
+}
+
+#chatbot {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+
+}
+
+
+/* Container do Bot */
+#connect-bot-container {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 9999;
+}
+
+/* Seu Mascote */
+#bot-launcher {
+    width: 100px;
+    height: 100px;
+    background: var(--bg-dark);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(45, 0, 247, 0.5);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    border: 2px solid var(--accent-green);
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+}
+
+#bot-launcher:active {
+    transform: scale(0.95);
+}
+
+#bot-launcher img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 2px solid var(--bg-dark);
+    animation: pulse 2s infinite;
+}
+
+/* Janela do Chat (Seu Design) */
+#chat-window {
+    display: none;
+    width: 500px;
+    height: 500px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    bottom: 120px;
+    right: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.chat-header {
+    background: var(--primary-gradient);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-info h3 {
+    color: white;
+    margin: 0;
+    font-size: 16px;
+}
+
+.header-info p {
+    margin: 0;
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.avatar-small {
+    width: 36px;
+    height: 36px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.avatar-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: #2D00F7 transparent;
+}
+
+/* Input Area (Adicionado para poder digitar) */
+.chat-input-area {
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#user-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    outline: none;
+    font-size: 16px;
+}
+
+#send-btn {
+    background: var(--accent-green);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #000;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mensagens */
+.msg {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+}
+
+.msg-bot {
+    background: #1f2442;
+    color: #e0e0e0;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    border: 1px solid rgba(45, 0, 247, 0.3);
+}
+
+.msg-user {
+    background: var(--accent-green);
+    color: #0a0b1e;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+    font-weight: 700;
+}
+
+.typing-indicator {
+    font-size: 12px;
+    color: #aaa;
+    margin-left: 20px;
+    display: none;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ==========================================================================
+   11. RESPONSIVIDADE
+   ========================================================================== */
+
+/* --- Telas Médias (Tablets) --- */
+@media (max-width: 992px) {
+    section {
+        padding: 4rem 0;
+    }
+
+    .menu .container-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+.sobre-texto h2, #avaliacoes h2, #contato h2 {
+        font-size: 2.5rem;
+    }
+    
+    #bot-launcher {
+        width: 40px;
+        height: 40px;
+    }
+
+    #chat-window {
+        width: 350px;
+        height: 500px;
+    }
+
+    .card-back .text-content h3 {
+        font-size: 1rem;
+    }
+
+    .card-back .text-content p {
+        font-size: 0.8rem;
+    }
+
+    .sobre-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .sobre-container .bolas {
+        display: none;
+    }
+
+    #send-btn {
+        width: 20px;
+        height: 20px;
+    }
+
+    #user-input {
+        font-size: 12px;
+    }
+
+    .sobre-texto h2, #avaliacoes h2, #contato h2 {
+        font-size: 3rem;
+    }
+
+    #contato .campo {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    footer .redes-sociais {
+        flex-direction: column;
+        gap: 3rem;
+    }
+}
+
+/* --- Telas Pequenas (Celulares) --- */
+@media (max-width: 768px) {
+    html {
+        font-size: 93.75%; /* 1rem = 15px */
+    }
+
+    .menu .secao {
+        gap: 0.5rem;
+        font-size: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sobre-texto h2, #avaliacoes h2, #contato h2 {
+        font-size: 2.5rem;
+    }
+    
+    #bot-launcher {
+        width: 60px;
+        height: 60px;
+    }
+
+    #chat-window {
+        width: 350px;
+        height: 500px;
+    }
+
+    .card-back .text-content h3 {
+        font-size: 1rem;
+    }
+
+    .card-back .text-content p {
+        font-size: 0.8rem;
+    }
+    
+    #valores .container-cards,
+    .container-cards-servicos {
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    .card-valor, .card-container {
+        width: 100%;
+        max-width: 300px;
+        max-height: 400px;
+    }
+
+    #send-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    #user-input {
+        font-size: 12px;
+    }
+    
+    .card-container {
+        height: 550px; /* Altura menor para mobile */
+    }
+
+    #avaliacoes .dados {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .campo p {
+        font-size: 2rem;
+    }
+
+    footer .icones-redes {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+/* --- Telas Muito Pequenas --- */
+@media (max-width: 480px) {
+    html {
+        font-size: 87.5%; /* 1rem = 14px */
+    }
+
+     .sobre-texto h2, #avaliacoes h2, #contato h2 {
+        font-size: 2.5rem;
+    }
+    
+    #bot-launcher {
+        width: 60px;
+        height: 60px;
+    }
+
+    #chat-window {
+        width: 300px;
+        height: 500px;
+    }
+
+    .card-back .text-content h3 {
+        font-size: 1rem;
+    }
+
+    .card-back .text-content p {
+        font-size: 0.8rem;
+    }
+    
+    .sobre-texto h2, #avaliacoes h2, #contato h2 {
+        font-size: 2.2rem;
+    }
+
+    .btn-whatsapp .elementos p {
+        font-size: 1rem;
+    }
+}
