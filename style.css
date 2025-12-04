@@ -1055,7 +1055,7 @@ footer .bloco p {
     .card-valor, .card-container {
         width: 100%;
         max-width: 300px;
-        max-height: 400px;
+        max-height: 450px;
     }
 
     #send-btn {
