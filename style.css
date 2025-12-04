@@ -1095,6 +1095,10 @@ footer .bloco p {
      .sobre-texto h2, #avaliacoes h2, #contato h2 {
         font-size: 2.5rem;
     }
+
+   .sobre-texto p {
+    width: 100%;
+   }
     
     #bot-launcher {
         width: 60px;
